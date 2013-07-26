@@ -30,4 +30,4 @@ proguard/
 .idea/
 
 # vim
-.swp
+*.swp
