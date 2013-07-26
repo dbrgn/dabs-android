@@ -6,18 +6,16 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import ch.dbrgn.fragments.TodayFragment;
 import ch.dbrgn.fragments.TomorrowFragment;
 import de.akquinet.android.androlog.Log;
 
 public class MainActivity extends Activity {
 
-    /**
-     * Called when the activity is first created.
-     * @param savedInstanceState If the activity is being re-initialized after
-     * previously being shut down then this Bundle contains the data it most
-     * recently supplied in onSaveInstanceState(Bundle). <b>Note: Otherwise it is null.</b>
-     */
+    /** {@inheritDoc} */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,12 +24,12 @@ public class MainActivity extends Activity {
         Log.init();
 
         // Log a message (only on dev platform)
-        Log.i(this, "onCreate");
+        Log.i("onCreate");
 
         // Setup action bar for tabs
         ActionBar actionBar = getActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-        actionBar.setDisplayShowTitleEnabled(false);
+        actionBar.setDisplayShowTitleEnabled(true);
 
         // Create tabs
         Tab tabToday = actionBar.newTab()
@@ -46,8 +44,28 @@ public class MainActivity extends Activity {
         // Add tabs to action bar
         actionBar.addTab(tabToday);
         actionBar.addTab(tabTomorrow);
+    }
 
-        //setContentView(R.layout.main); // TODO remove?
+    /** {@inheritDoc} */
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        Log.i("onCreateOptionsMenu");
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main_activity_actions, menu);
+        return true;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle presses on the action bar items
+        switch (item.getItemId()) {
+            case R.id.action_refresh:
+                Log.i("Refresh");
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     public static class TabListener<T extends Fragment> implements ActionBar.TabListener {
