@@ -3,7 +3,6 @@ package ch.dbrgn.fragments;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.*;
 import android.webkit.WebView;
@@ -14,7 +13,7 @@ import de.akquinet.android.androlog.Log;
 
 public abstract class DayFragment extends Fragment implements IDayFragment {
 
-    protected View view;
+    protected View frameView;
     protected WebView webview;
     protected Activity activity;
     protected final int MAP_WIDTH = 1920;
@@ -31,21 +30,47 @@ public abstract class DayFragment extends Fragment implements IDayFragment {
 
         // Inflate view
         final int viewResID = getResources().getIdentifier("fragment_" + getDayText(), "layout", activity.getPackageName());
-        view = inflater.inflate(viewResID, container, false);
-        Log.i("Setting this.view to " + view.toString());
+        frameView = inflater.inflate(viewResID, container, false);
+        Log.i("Setting this.frameView to " + frameView.toString());
 
         // Get WebView
-        this.webview = (WebView) this.view.findViewById(R.id.map_view);
+        this.webview = (WebView) this.frameView.findViewById(R.id.map_view);
         this.webview.setInitialScale(getMapScale());
         this.webview.setBackgroundColor(0x00000000);
         this.webview.getSettings().setBuiltInZoomControls(true); // Show zoom controls
         this.webview.getSettings().setUseWideViewPort(true); // Enable zooming out as much as possible
+        this.webview.setWebViewClient(new WebViewClient() {
+            @Override
+            public void onLoadResource(WebView view, String url) {
+                Log.i("Updating content for " + getDayText() + "...");
+                // Hide content
+                if (frameView == null) {
+                    Log.e("Fragment view object is null.");
+                } else {
+                    frameView.findViewById(R.id.map_view).setVisibility(View.GONE);
+                    frameView.findViewById(R.id.text_view).setVisibility(View.GONE);
+                    frameView.findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                // Show content
+                if (frameView == null) {
+                    Log.e("Fragment view object is null.");
+                } else {
+                    frameView.findViewById(R.id.text_view).setVisibility(View.VISIBLE);
+                    frameView.findViewById(R.id.map_view).setVisibility(View.VISIBLE);
+                    frameView.findViewById(R.id.loadingPanel).setVisibility(View.GONE);
+                }
+            }
+        });
 
         // Update data
         updateContent();
 
         // Return fragment view
-        return this.view;
+        return this.frameView;
     }
 
 
@@ -55,44 +80,7 @@ public abstract class DayFragment extends Fragment implements IDayFragment {
      * Update content in a background thread.
      */
     public void updateContent() {
-        if (this.view != null) {
-            (new UpdateContent()).execute();
-        } else {
-            throw new RuntimeException("Fragment view object is null.");
-        }
-    }
-
-    protected class UpdateContent extends AsyncTask<Void, Void, Void> {
-
-        @Override
-        protected void onPreExecute() {
-            Log.i("Updating content for " + getDayText() + "...");
-            // Hide content
-            if (view == null) {
-                throw new RuntimeException("Fragment view object is null.");
-            }
-            view.findViewById(R.id.map_view).setVisibility(View.GONE);
-            view.findViewById(R.id.text_view).setVisibility(View.GONE);
-            view.findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
-        }
-
-        @Override
-        protected Void doInBackground(Void... params) {
-            // TODO preload image to cache
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void response) {
-            // Show content
-            if (view == null) {
-                throw new RuntimeException("Fragment view object is null.");
-            }
-            webview.loadUrl(getMapURL());
-            view.findViewById(R.id.text_view).setVisibility(View.VISIBLE);
-            view.findViewById(R.id.map_view).setVisibility(View.VISIBLE);
-            view.findViewById(R.id.loadingPanel).setVisibility(View.GONE);
-        }
+        webview.loadUrl(getMapURL());
     }
 
 
