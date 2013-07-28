@@ -1,17 +1,17 @@
 package ch.dbrgn;
 
-import android.app.ActionBar;
+import android.app.*;
 import android.app.ActionBar.Tab;
-import android.app.Activity;
-import android.app.Fragment;
-import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import ch.dbrgn.fragments.DayFragment;
 import ch.dbrgn.fragments.TodayFragment;
 import ch.dbrgn.fragments.TomorrowFragment;
 import de.akquinet.android.androlog.Log;
+
+import java.util.ArrayList;
 
 public class MainActivity extends Activity {
 
@@ -61,7 +61,8 @@ public class MainActivity extends Activity {
         // Handle presses on the action bar items
         switch (item.getItemId()) {
             case R.id.action_refresh:
-                Log.i("Refresh");
+                // TODO
+                Log.i("Refreshed");
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -69,7 +70,7 @@ public class MainActivity extends Activity {
     }
 
     public static class TabListener<T extends Fragment> implements ActionBar.TabListener {
-        private Fragment mFragment;
+        private DayFragment mFragment;
         private final Activity mActivity;
         private final String mTag;
         private final Class<T> mClass;
@@ -90,12 +91,13 @@ public class MainActivity extends Activity {
             // Check if the fragment is already initialized
             if (mFragment == null) {
                 // If not, instantiate and add it to the activity
-                mFragment = Fragment.instantiate(mActivity, mClass.getName());
+                mFragment = (DayFragment) Fragment.instantiate(mActivity, mClass.getName());
                 ft.add(android.R.id.content, mFragment, mTag);
             } else {
                 // If it exists, simply attach it in order to show it
                 ft.attach(mFragment);
             }
+            mFragment.updateContent();
         }
 
         public void onTabUnselected(Tab tab, FragmentTransaction ft) {

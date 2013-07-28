@@ -10,9 +10,11 @@ import ch.dbrgn.R;
 public class TomorrowFragment extends Fragment {
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_tomorrow, container, false);
+    }
+
+    public String getDayText() {
+        return "tomorrow";
     }
 }
