@@ -4,16 +4,25 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <RelativeLayout
+        android:id="@+id/loadingPanel"
+        style="@style/GenericProgressBackground">
+        <ProgressBar
+            style="@style/GenericProgressIndicator" />
+    </RelativeLayout>
+
     <TextView
+        android:id="@+id/text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TOMORROW."
-        android:id="@+id/textView"
-        android:layout_gravity="left|center_vertical" />
+        android:layout_gravity="left|center_vertical"
+        android:visibility="gone" />
 
     <WebView xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/map_view"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent" />
+        android:layout_height="fill_parent"
+        android:visibility="gone" />
 
 </LinearLayout>

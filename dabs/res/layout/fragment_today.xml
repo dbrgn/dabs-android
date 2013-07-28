@@ -4,11 +4,18 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <RelativeLayout
+        android:id="@+id/loadingPanel"
+        style="@style/GenericProgressBackground">
+        <ProgressBar
+            style="@style/GenericProgressIndicator" />
+    </RelativeLayout>
+
     <TextView
+        android:id="@+id/text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TODAY!"
-        android:id="@+id/textView"
         android:layout_gravity="left|center_vertical"
         android:visibility="gone" />
 

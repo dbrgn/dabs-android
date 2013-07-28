@@ -97,7 +97,7 @@ public class MainActivity extends Activity {
                 // If it exists, simply attach it in order to show it
                 ft.attach(mFragment);
             }
-            mFragment.updateContent();
+            //mFragment.updateContent();
         }
 
         public void onTabUnselected(Tab tab, FragmentTransaction ft) {
