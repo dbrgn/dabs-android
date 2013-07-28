@@ -33,38 +33,42 @@ public abstract class DayFragment extends Fragment implements IDayFragment {
         frameView = inflater.inflate(viewResID, container, false);
         Log.i("Setting this.frameView to " + frameView.toString());
 
-        // Get WebView
+        // Get and configure WebView
         this.webview = (WebView) this.frameView.findViewById(R.id.map_view);
-        this.webview.setInitialScale(getMapScale());
-        this.webview.setBackgroundColor(0x00000000);
-        this.webview.getSettings().setBuiltInZoomControls(true); // Show zoom controls
-        this.webview.getSettings().setUseWideViewPort(true); // Enable zooming out as much as possible
-        this.webview.setWebViewClient(new WebViewClient() {
-            @Override
-            public void onLoadResource(WebView view, String url) {
-                Log.i("Updating content for " + getDayText() + "...");
-                // Hide content
-                if (frameView == null) {
-                    Log.e("Fragment view object is null.");
-                } else {
-                    frameView.findViewById(R.id.map_view).setVisibility(View.GONE);
-                    frameView.findViewById(R.id.text_view).setVisibility(View.GONE);
-                    frameView.findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
+        if (savedInstanceState != null) {
+            this.webview.restoreState(savedInstanceState);
+        } else {
+            this.webview.setInitialScale(getMapScale());
+            this.webview.setBackgroundColor(0x00000000);
+            this.webview.getSettings().setBuiltInZoomControls(true); // Show zoom controls
+            this.webview.getSettings().setUseWideViewPort(true); // Enable zooming out as much as possible
+            this.webview.setWebViewClient(new WebViewClient() {
+                @Override
+                public void onLoadResource(WebView view, String url) {
+                    Log.i("Updating content for " + getDayText() + "...");
+                    // Hide content
+                    if (frameView == null) {
+                        Log.e("Fragment view object is null.");
+                    } else {
+                        frameView.findViewById(R.id.map_view).setVisibility(View.GONE);
+                        frameView.findViewById(R.id.text_view).setVisibility(View.GONE);
+                        frameView.findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
+                    }
                 }
-            }
 
-            @Override
-            public void onPageFinished(WebView view, String url) {
-                // Show content
-                if (frameView == null) {
-                    Log.e("Fragment view object is null.");
-                } else {
-                    frameView.findViewById(R.id.text_view).setVisibility(View.VISIBLE);
-                    frameView.findViewById(R.id.map_view).setVisibility(View.VISIBLE);
-                    frameView.findViewById(R.id.loadingPanel).setVisibility(View.GONE);
+                @Override
+                public void onPageFinished(WebView view, String url) {
+                    // Show content
+                    if (frameView == null) {
+                        Log.e("Fragment view object is null.");
+                    } else {
+                        frameView.findViewById(R.id.text_view).setVisibility(View.VISIBLE);
+                        frameView.findViewById(R.id.map_view).setVisibility(View.VISIBLE);
+                        frameView.findViewById(R.id.loadingPanel).setVisibility(View.GONE);
+                    }
                 }
-            }
-        });
+            });
+        }
 
         // Update data
         updateContent();
@@ -73,6 +77,11 @@ public abstract class DayFragment extends Fragment implements IDayFragment {
         return this.frameView;
     }
 
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        // Save state of webview
+        this.webview.saveState(outState);
+    }
 
     /*** DATA UPDATES ***/
 
