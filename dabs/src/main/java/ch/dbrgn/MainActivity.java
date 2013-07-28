@@ -15,6 +15,8 @@ import java.util.ArrayList;
 
 public class MainActivity extends Activity {
 
+    /*** ACTIVITY LIFECYCLE ***/
+
     /** {@inheritDoc} */
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -46,6 +48,11 @@ public class MainActivity extends Activity {
         actionBar.addTab(tabTomorrow);
     }
 
+
+
+
+    /*** ACTION BAR ***/
+
     /** {@inheritDoc} */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -54,6 +61,9 @@ public class MainActivity extends Activity {
         inflater.inflate(R.menu.main_activity_actions, menu);
         return true;
     }
+
+
+    /*** TABS ***/
 
     /** {@inheritDoc} */
     @Override
@@ -95,15 +105,14 @@ public class MainActivity extends Activity {
                 ft.add(android.R.id.content, mFragment, mTag);
             } else {
                 // If it exists, simply attach it in order to show it
-                ft.attach(mFragment);
+                ft.show(mFragment);
             }
-            //mFragment.updateContent();
         }
 
         public void onTabUnselected(Tab tab, FragmentTransaction ft) {
             if (mFragment != null) {
                 // Detach the fragment, because another one is being attached
-                ft.detach(mFragment);
+                ft.hide(mFragment);
             }
         }
 
