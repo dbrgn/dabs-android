@@ -78,7 +78,7 @@ public abstract class DayFragment extends Fragment implements IDayFragment {
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
-        // Save state of webview
+        // Save state of mWebview
         this.webview.saveState(outState);
     }
 
