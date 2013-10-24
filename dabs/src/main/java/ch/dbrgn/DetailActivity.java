@@ -39,7 +39,8 @@ public class DetailActivity extends Activity {
 
         // Set texts
         final TextView textView = (TextView) findViewById(R.id.text_view);
-        textView.setText(mDayType.toUpperCase());
+        textView.setText("Here you can see the DABS map for " + mDayType + ". " +
+                         "Double-tap or pinch the map to zoom.");
 
         // Get and configure WebView
         this.mWebview = (WebView) findViewById(R.id.map_view);
@@ -53,11 +54,11 @@ public class DetailActivity extends Activity {
             this.mWebview.setWebViewClient(new WebViewClient() {
                 @Override
                 public void onLoadResource(WebView view, String url) {
-                    Log.i("Updating content for " + mDayType + "...");
                     // Hide content
                     findViewById(R.id.map_view).setVisibility(View.GONE);
                     findViewById(R.id.text_view).setVisibility(View.GONE);
                     findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
+                    Log.i("Updating content for " + mDayType + "...");
                 }
 
                 @Override
@@ -66,6 +67,7 @@ public class DetailActivity extends Activity {
                     findViewById(R.id.text_view).setVisibility(View.VISIBLE);
                     findViewById(R.id.map_view).setVisibility(View.VISIBLE);
                     findViewById(R.id.loadingPanel).setVisibility(View.GONE);
+                    Log.i("Updating content for " + mDayType + " done.");
                 }
             });
         }
@@ -73,6 +75,13 @@ public class DetailActivity extends Activity {
         // Update data
         updateContent();
     }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        // Save state of webview
+        mWebview.saveState(outState);
+    }
+
 
     /*** ACTION BAR ***/
 
@@ -86,10 +95,17 @@ public class DetailActivity extends Activity {
     }
 
     @Override
-    public void onSaveInstanceState(Bundle outState) {
-        // Save state of webview
-        mWebview.saveState(outState);
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle presses on the action bar items
+        switch (item.getItemId()) {
+            case R.id.action_refresh:
+                updateContent();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
+
 
     /*** DATA UPDATES ***/
 

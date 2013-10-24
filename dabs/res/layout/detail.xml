@@ -7,16 +7,19 @@
 
     <RelativeLayout
         android:id="@+id/loadingPanel"
-        style="@style/GenericProgressBackground">
+        style="@style/GenericProgressBackground"
+        android:visibility="visible">
         <ProgressBar style="@style/GenericProgressIndicator" />
     </RelativeLayout>
 
     <TextView
         android:id="@+id/text_view"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="left|center_vertical"
-        android:visibility="gone" />
+        android:visibility="gone"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="12dp" />
 
     <WebView
         android:id="@+id/map_view"
