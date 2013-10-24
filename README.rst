@@ -1,10 +1,12 @@
 dabs-android
 ============
 
-This is an Android 4+ app that displays today's and tomorrow's DABS (Daily
+This is an Android 4.1+ app that displays today's and tomorrow's DABS (Daily
 Airspace Bulletin Switzerland) from Skyguide.
 
 You can find the DABS here: http://www.skyguide.ch/en/nc/services/aim-services/dabs/
+
+Current status: In development. No Play Store release yet.
 
 
 Author

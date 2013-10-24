@@ -14,8 +14,7 @@
   </modules>
 
   <properties>
-    <platform.version> 4.0.1.2
-          </platform.version>
+    <platform.version>4.1.1.4</platform.version>
   </properties>
 
   <!-- TODO remove as soon as 3.7.1 of android-maven-plugin is in main repo -->

@@ -32,6 +32,10 @@ public class DetailActivity extends Activity {
         // Inflate layout
         setContentView(R.layout.detail);
 
+        // Configure action bar
+        final ActionBar actionBar = getActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
         // Get the message from the intent
         Intent intent = getIntent();
         mDayType = intent.getStringExtra(HomescreenActivity.EXTRA_DAY_TYPE);
