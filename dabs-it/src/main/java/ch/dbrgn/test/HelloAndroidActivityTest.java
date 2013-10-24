@@ -3,14 +3,14 @@ package ch.dbrgn.test;
 import android.test.ActivityInstrumentationTestCase2;
 import ch.dbrgn.*;
 
-public class HelloAndroidActivityTest extends ActivityInstrumentationTestCase2<MainActivity> {
+public class HelloAndroidActivityTest extends ActivityInstrumentationTestCase2<DetailActivity> {
 
     public HelloAndroidActivityTest() {
-        super(MainActivity.class);
+        super(DetailActivity.class);
     }
 
     public void testActivity() {
-        MainActivity activity = getActivity();
+        DetailActivity activity = getActivity();
         assertNotNull(activity);
     }
 }

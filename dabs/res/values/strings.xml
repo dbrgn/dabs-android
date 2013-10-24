@@ -2,7 +2,7 @@
 <resources>
     <string name="hello">Welcome!</string>
     <string name="app_name">DABS Viewer</string>
-    <string name="tab_today">Today</string>
-    <string name="tab_tomorrow">Tomorrow</string>
+    <string name="today">Today</string>
+    <string name="tomorrow">Tomorrow</string>
     <string name="refresh">Refresh</string>
 </resources>

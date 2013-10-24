@@ -18,7 +18,6 @@ public abstract class DayFragment extends Fragment implements IDayFragment {
     protected Activity activity;
     protected final int MAP_WIDTH = 1920;
 
-
     /*** ACTIVITY LIFECYCLE ***/
 
     @Override
@@ -119,4 +118,5 @@ public abstract class DayFragment extends Fragment implements IDayFragment {
         val = val * 100d;
         return val.intValue();
     }
+
 }
