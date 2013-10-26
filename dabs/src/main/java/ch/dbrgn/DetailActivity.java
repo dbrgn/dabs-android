@@ -49,42 +49,53 @@ public class DetailActivity extends Activity {
 
         // Get and configure WebView
         this.mWebview = (WebView) findViewById(R.id.map_view);
+        this.mWebview.setInitialScale(getMapScale());
+        this.mWebview.setBackgroundColor(0x00000000);
+        this.mWebview.getSettings().setBuiltInZoomControls(true); // Show zoom controls
+        this.mWebview.getSettings().setUseWideViewPort(true); // Enable zooming out as much as possible
+
         if (savedInstanceState != null) {
             this.mWebview.restoreState(savedInstanceState);
+            setLoadingPanelVisibility(false);
         } else {
-            this.mWebview.setInitialScale(getMapScale());
-            this.mWebview.setBackgroundColor(0x00000000);
-            this.mWebview.getSettings().setBuiltInZoomControls(true); // Show zoom controls
-            this.mWebview.getSettings().setUseWideViewPort(true); // Enable zooming out as much as possible
             this.mWebview.setWebViewClient(new WebViewClient() {
                 @Override
                 public void onLoadResource(WebView view, String url) {
-                    // Hide content
-                    findViewById(R.id.map_view).setVisibility(View.GONE);
-                    findViewById(R.id.text_view).setVisibility(View.GONE);
-                    findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
+                    setLoadingPanelVisibility(true);
                     Log.i("Updating content for " + mDayType + "...");
                 }
 
                 @Override
                 public void onPageFinished(WebView view, String url) {
-                    // Show content
-                    findViewById(R.id.text_view).setVisibility(View.VISIBLE);
-                    findViewById(R.id.map_view).setVisibility(View.VISIBLE);
-                    findViewById(R.id.loadingPanel).setVisibility(View.GONE);
+                    setLoadingPanelVisibility(false);
                     Log.i("Updating content for " + mDayType + " done.");
                 }
             });
-        }
 
-        // Update data
-        updateContent();
+            updateContent();
+        }
     }
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
         // Save state of webview
         mWebview.saveState(outState);
+    }
+
+    /**
+     * Show or hide loading panel.
+     * @param visible If set to true, a loading animation will be shown instead of the content.
+     */
+    private void setLoadingPanelVisibility(boolean visible) {
+        if (visible) {
+            findViewById(R.id.map_view).setVisibility(View.GONE);
+            findViewById(R.id.text_view).setVisibility(View.GONE);
+            findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
+        } else {
+            findViewById(R.id.text_view).setVisibility(View.VISIBLE);
+            findViewById(R.id.map_view).setVisibility(View.VISIBLE);
+            findViewById(R.id.loadingPanel).setVisibility(View.GONE);
+        }
     }
 
 

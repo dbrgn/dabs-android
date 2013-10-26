@@ -14,7 +14,7 @@
         <category android:name="android.intent.category.LAUNCHER" />
       </intent-filter>
     </activity>
-    <activity android:name=".DetailActivity" android:parentActivityName=".HomescreenActivity" />
+    <activity android:name=".DetailActivity" android:parentActivityName=".HomescreenActivity" android:configChanges="orientation|screenSize" />
   </application>
 
 </manifest>
