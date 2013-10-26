@@ -3,6 +3,7 @@ package ch.dbrgn;
 import android.app.*;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Point;
 import android.os.Bundle;
 import android.view.*;
 import android.webkit.WebView;
@@ -121,7 +122,7 @@ public class DetailActivity extends Activity {
     }
 
 
-    /*** URL MANAGEMENT ***/
+    /*** Utils ***/
 
     /**
      * Return the map URL String.
@@ -141,9 +142,12 @@ public class DetailActivity extends Activity {
      * Get scale factor for map
      */
     private int getMapScale(){
+        // Get display width
         Display display = ((WindowManager) getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
-        final int width = display.getWidth();
-        Double val = (double) width / (double) MAP_WIDTH;
+        Point point = new Point();
+        display.getSize(point);
+        // Calculate map scale
+        Double val = (double) point.x / (double) MAP_WIDTH;
         val = val * 100d;
         return val.intValue();
     }
