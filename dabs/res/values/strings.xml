@@ -5,5 +5,5 @@
     <string name="today">Today</string>
     <string name="tomorrow">Tomorrow</string>
     <string name="refresh">Refresh</string>
-    <string name="disclaimer">Disclaimer: All DABS data used in this app is © by Skyguide. While I (the author of this app) try to make the information as accurate and up to date as possible, I do not guarantee for the data at all. Maps and Texts are extracted from the Skyguide PDF automatically, therefore errors cann occur in this process. If you want to make sure the data is accurate and up to date, please check out the original Skyguide PDF files. I accept no liability with regard to the use of the information provided by this app.</string>
+    <string name="disclaimer">Disclaimer: All DABS data used in this app is © by Skyguide. Whilst I (the author of this app) try to make the information as accurate and up to date as possible, I do not guarantee for the data at all. Maps and Texts are extracted from the Skyguide PDF automatically, therefore errors can occur in this process. If you want to make sure the data is accurate and up to date, please check out the original Skyguide PDF files. I accept no liability with regard to the use of the information provided by this app.</string>
 </resources>
