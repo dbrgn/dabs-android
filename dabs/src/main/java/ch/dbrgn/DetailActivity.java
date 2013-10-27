@@ -26,8 +26,6 @@ public class DetailActivity extends Activity {
 
         // Initializes the logging
         Log.init();
-
-        // Log a message (only on dev platform)
         Log.i("onCreate");
 
         // Inflate layout
@@ -43,6 +41,7 @@ public class DetailActivity extends Activity {
         Log.i("Initializing a DetailActivity for " + mDayType);
 
         // Set texts
+        setTitle("DABS " + Character.toUpperCase(mDayType.charAt(0)) + mDayType.substring(1));
         final TextView textView = (TextView) findViewById(R.id.text_view);
         textView.setText("Here you can see the DABS map for " + mDayType + ". " +
                          "Double-tap or pinch the map to zoom.");
@@ -106,7 +105,7 @@ public class DetailActivity extends Activity {
     public boolean onCreateOptionsMenu(Menu menu) {
         Log.i("onCreateOptionsMenu");
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.main_activity_actions, menu);
+        inflater.inflate(R.menu.detail_actions, menu);
         return true;
     }
 

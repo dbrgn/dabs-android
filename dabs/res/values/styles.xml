@@ -11,4 +11,14 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:indeterminate">true</item>
     </style>
+    <style name="about_title" parent="about_text">
+        <item name="android:textStyle">bold</item>
+        <item name="android:paddingBottom">0dp</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+    <style name="about_text">
+        <item name="android:paddingTop">8dp</item>
+        <item name="android:paddingBottom">8dp</item>
+        <item name="android:textSize">14sp</item>
+    </style>
 </resources>
