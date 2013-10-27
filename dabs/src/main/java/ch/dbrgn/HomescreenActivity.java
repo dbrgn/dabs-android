@@ -18,8 +18,12 @@ along with DABS Viewer. If not, see <http://www.gnu.org/licenses/>.
 package ch.dbrgn;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.*;
 import android.widget.Button;
 import de.akquinet.android.androlog.Log;
@@ -27,6 +31,9 @@ import de.akquinet.android.androlog.Log;
 public class HomescreenActivity extends Activity {
 
     public final static String EXTRA_DAY_TYPE = "ch.dbrgn.dabs.DAY_TYPE";
+    private SharedPreferences mPrefs;
+    private final static String DISCLAIMER_SHOWN_PREF = "disclaimerShown";
+
 
     /*** ACTIVITY LIFECYCLE ***/
 
@@ -38,6 +45,10 @@ public class HomescreenActivity extends Activity {
         // Initializes the logging
         Log.init();
         Log.i("onCreate");
+
+        // Get shared preferences
+        mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+        Boolean disclaimerShown = mPrefs.getBoolean(DISCLAIMER_SHOWN_PREF, false);
 
         // Inflate layout
         setContentView(R.layout.homescreen);
@@ -62,6 +73,20 @@ public class HomescreenActivity extends Activity {
             }
         });
 
+        // Show disclaimer on first start
+        if (!disclaimerShown) {
+            String disclaimerTitle = getResources().getString(R.string.disclaimer_title);
+            String disclaimerText = getResources().getString(R.string.disclaimer_text);
+            new AlertDialog.Builder(this).setIcon(android.R.drawable.ic_dialog_alert).setTitle(disclaimerTitle).setMessage(disclaimerText).setPositiveButton(
+                    R.string.ok, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            }).show();
+            SharedPreferences.Editor editor = mPrefs.edit();
+            editor.putBoolean(DISCLAIMER_SHOWN_PREF, true);
+            editor.commit(); // Very important to save the preference
+        }
     }
 
     @Override

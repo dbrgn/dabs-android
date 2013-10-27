@@ -3,9 +3,11 @@
     <!-- General strings -->
     <string name="hello">Welcome!</string>
     <string name="app_name">DABS Viewer</string>
+    <string name="ok">OK</string>
 
     <!-- Home -->
-    <string name="disclaimer">Disclaimer: All DABS data used in this app is © by Skyguide. Whilst I (the author of this app) try to make the information as accurate and up to date as possible, I do not guarantee for the data at all. Maps and Texts are extracted from the Skyguide PDF automatically, therefore errors can occur in this process. If you want to make sure the data is accurate and up to date, please check out the original Skyguide PDF files. I accept no liability with regard to the use of the information provided by this app.</string>
+    <string name="disclaimer_title">Disclaimer</string>
+    <string name="disclaimer_text">All DABS data used in this app is © by Skyguide. Whilst I (the author of this app) try to make the information as accurate and up to date as possible, I do not guarantee for the data at all. Maps and Texts are extracted from the Skyguide PDF automatically, therefore errors can occur in this process. If you want to make sure the data is accurate and up to date, please check out the original Skyguide PDF files. I accept no liability with regard to the use of the information provided by this app.</string>
 
     <!-- Details -->
     <string name="today">Today</string>
@@ -19,5 +21,5 @@
     <string name="about_text_part1">This app is released under the GPLv3 license and available on GitHub: https://github.com/dbrgn/dabs-android. The web service that does all the PDF processing work is also on GitHub: https://github.com/dbrgn/dabs-service</string>
     <string name="about_title_part2">The Author</string>
     <string name="about_text_part2">Hi, I\'m Danilo Bargen. As a paragliding pilot, I find this kind of information useful and important, but the PDF version of the DABS by Skyguide is not too convenient on the go. This app tries to make that easier.\n\nIf you want to contact me, just send an e-mail to mail@dbrgn.ch or a tweet to @dbrgn.</string>
-    <string name="about_title_disclaimer">Disclaimer</string>
+
 </resources>

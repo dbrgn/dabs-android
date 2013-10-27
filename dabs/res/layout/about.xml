@@ -38,13 +38,13 @@
             style="@style/about_title"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="@string/about_title_disclaimer" />
+            android:text="@string/disclaimer_title" />
 
         <TextView
             style="@style/about_text"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="@string/disclaimer" />
+            android:text="@string/disclaimer_text" />
 
     </LinearLayout>
 
