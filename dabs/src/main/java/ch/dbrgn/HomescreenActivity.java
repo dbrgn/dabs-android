@@ -31,13 +31,8 @@ import de.akquinet.android.androlog.Log;
 public class HomescreenActivity extends Activity {
 
     public final static String EXTRA_DAY_TYPE = "ch.dbrgn.dabs.DAY_TYPE";
-    private SharedPreferences mPrefs;
     private final static String DISCLAIMER_SHOWN_PREF = "disclaimerShown";
 
-
-    /*** ACTIVITY LIFECYCLE ***/
-
-    /** {@inheritDoc} */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,8 +42,8 @@ public class HomescreenActivity extends Activity {
         Log.i("onCreate");
 
         // Get shared preferences
-        mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
-        Boolean disclaimerShown = mPrefs.getBoolean(DISCLAIMER_SHOWN_PREF, false);
+        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+        Boolean disclaimerShown = sharedPrefs.getBoolean(DISCLAIMER_SHOWN_PREF, false);
 
         // Inflate layout
         setContentView(R.layout.homescreen);
@@ -83,7 +78,7 @@ public class HomescreenActivity extends Activity {
                     dialog.dismiss();
                 }
             }).show();
-            SharedPreferences.Editor editor = mPrefs.edit();
+            SharedPreferences.Editor editor = sharedPrefs.edit();
             editor.putBoolean(DISCLAIMER_SHOWN_PREF, true);
             editor.commit(); // Very important to save the preference
         }
@@ -91,7 +86,6 @@ public class HomescreenActivity extends Activity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        Log.i("onCreateOptionsMenu");
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.home_actions, menu);
         return super.onCreateOptionsMenu(menu);

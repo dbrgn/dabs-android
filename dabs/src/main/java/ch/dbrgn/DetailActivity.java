@@ -98,29 +98,12 @@ public class DetailActivity extends Activity {
         mWebview.saveState(outState);
     }
 
-    /**
-     * Show or hide loading panel.
-     * @param visible If set to true, a loading animation will be shown instead of the content.
-     */
-    private void setLoadingPanelVisibility(boolean visible) {
-        if (visible) {
-            findViewById(R.id.map_view).setVisibility(View.GONE);
-            findViewById(R.id.text_view).setVisibility(View.GONE);
-            findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
-        } else {
-            findViewById(R.id.text_view).setVisibility(View.VISIBLE);
-            findViewById(R.id.map_view).setVisibility(View.VISIBLE);
-            findViewById(R.id.loadingPanel).setVisibility(View.GONE);
-        }
-    }
-
 
     /*** ACTION BAR ***/
 
     /** {@inheritDoc} */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        Log.i("onCreateOptionsMenu");
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.detail_actions, menu);
         return true;
@@ -144,24 +127,40 @@ public class DetailActivity extends Activity {
     /**
      * Update content in a background thread.
      */
-    public void updateContent() {
+    private void updateContent() {
         mWebview.loadUrl(getMapURL());
     }
 
+    /**
+     * Show or hide loading panel.
+     * @param visible If set to true, a loading animation will be shown instead of the content.
+     */
+    private void setLoadingPanelVisibility(boolean visible) {
+        if (visible) {
+            findViewById(R.id.map_view).setVisibility(View.GONE);
+            findViewById(R.id.text_view).setVisibility(View.GONE);
+            findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
+        } else {
+            findViewById(R.id.text_view).setVisibility(View.VISIBLE);
+            findViewById(R.id.map_view).setVisibility(View.VISIBLE);
+            findViewById(R.id.loadingPanel).setVisibility(View.GONE);
+        }
+    }
 
-    /*** Utils ***/
+
+    /*** UTILS ***/
 
     /**
      * Return the map URL String.
      */
-    protected String getMapURL() {
+    private String getMapURL() {
         return Settings.BASE_URL + "/" + mDayType + "/map/";
     }
 
     /**
      * Return the text URL String.
      */
-    protected String getTextURL() {
+    private String getTextURL() {
         return Settings.BASE_URL + "/" + mDayType + "/text/";
     }
 
