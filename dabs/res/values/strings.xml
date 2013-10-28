@@ -12,6 +12,7 @@
     <string name="today">Today</string>
     <string name="tomorrow">Tomorrow</string>
     <string name="refresh">Refresh</string>
+    <string name="timeout_message">The map could not be loaded. This is probably due to a bad internet connection. Do you want to try again?</string>
 
     <!-- About -->
     <string name="about_action">About</string>

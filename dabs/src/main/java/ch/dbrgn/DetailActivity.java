@@ -19,14 +19,20 @@ package ch.dbrgn;
 
 import android.app.*;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Point;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.*;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.TextView;
 import de.akquinet.android.androlog.Log;
+
+import java.util.Date;
+
 
 public class DetailActivity extends Activity {
 
@@ -79,6 +85,11 @@ public class DetailActivity extends Activity {
                 public void onLoadResource(WebView view, String url) {
                     setLoadingPanelVisibility(true);
                     Log.i("Updating content for " + mDayType + "...");
+                }
+
+                @Override
+                public void onPageStarted(WebView view, String url, Bitmap favicon) {
+                    new CheckTimeoutTask().execute(mWebview);
                 }
 
                 @Override
@@ -139,11 +150,11 @@ public class DetailActivity extends Activity {
         if (visible) {
             findViewById(R.id.map_view).setVisibility(View.GONE);
             findViewById(R.id.text_view).setVisibility(View.GONE);
-            findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
+            findViewById(R.id.loading_panel).setVisibility(View.VISIBLE);
         } else {
             findViewById(R.id.text_view).setVisibility(View.VISIBLE);
             findViewById(R.id.map_view).setVisibility(View.VISIBLE);
-            findViewById(R.id.loadingPanel).setVisibility(View.GONE);
+            findViewById(R.id.loading_panel).setVisibility(View.GONE);
         }
     }
 
@@ -178,5 +189,66 @@ public class DetailActivity extends Activity {
         return val.intValue();
     }
 
-}
 
+    /*** AsyncTasks ***/
+
+    class CheckTimeoutTask extends AsyncTask<WebView, Void, Boolean> {
+
+        private WebView webView;
+
+        @Override
+        protected Boolean doInBackground(WebView... params) {
+            Log.i("CheckTimeoutTask started...");
+            this.webView = params[0];
+            long startTime = System.currentTimeMillis();
+            long elapsedTime;
+            while (true) {
+                elapsedTime = (new Date()).getTime() - startTime;
+                if (webView.getProgress() == 100) {
+                    Log.i("Page finished loading.");
+                    return true;
+                } else if (elapsedTime > Settings.CONTENT_LOAD_TIMEOUT_SECONDS * 1000) {
+                    Log.i("Page loading timeout reached.");
+                    return false;
+                }
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        @Override
+        protected void onPostExecute(Boolean loadSucceeded) {
+            Log.i("CheckTimeoutTask finishing...");
+            if (!loadSucceeded) {
+                // Stop loading of webview
+                this.webView.stopLoading();
+                findViewById(R.id.black_panel).setVisibility(View.VISIBLE);
+                // Show alert dialog
+                new AlertDialog.Builder(DetailActivity.this)
+                    .setMessage(R.string.timeout_message)
+                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            setLoadingPanelVisibility(true);
+                            findViewById(R.id.black_panel).setVisibility(View.GONE);
+                            updateContent();
+                        }
+                    })
+                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            DetailActivity.this.finish();
+                        }
+                    })
+                    .setOnCancelListener(new DialogInterface.OnCancelListener() {
+                        public void onCancel(DialogInterface dialog) {
+                            DetailActivity.this.finish();
+                        }
+                    })
+                    .show();
+            }
+        }
+    }
+
+}
