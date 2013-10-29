@@ -18,8 +18,6 @@ along with DABS Viewer. If not, see <http://www.gnu.org/licenses/>.
 package ch.dbrgn;
 
 class Settings {
-
     public static final String BASE_URL = "http://dabs.dbrgn.ch";
     public static final int CONTENT_LOAD_TIMEOUT_SECONDS = 20;
-
 }

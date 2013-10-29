@@ -64,10 +64,17 @@ public class DetailActivity extends Activity {
         Log.i("Initializing a DetailActivity for " + mDayType);
 
         // Set texts
-        setTitle("DABS " + Character.toUpperCase(mDayType.charAt(0)) + mDayType.substring(1));
+        String dayString;
+        if (mDayType.equals("today")) {
+            dayString = getString(R.string.today);
+        } else if (mDayType.equals("tomorrow")) {
+            dayString = getString(R.string.tomorrow);
+        } else {
+            throw new RuntimeException("Invalid mDayType: " + mDayType);
+        }
+        setTitle("DABS " + dayString);
         final TextView textView = (TextView) findViewById(R.id.text_view);
-        textView.setText("Here you can see the DABS map for " + mDayType + ". " +
-                         "Double-tap or pinch the map to zoom.");
+        textView.setText(String.format(getString(R.string.usage), dayString.toLowerCase()));
 
         // Get and configure WebView
         this.mWebview = (WebView) findViewById(R.id.map_view);
