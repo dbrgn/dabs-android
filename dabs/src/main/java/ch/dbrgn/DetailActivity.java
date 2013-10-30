@@ -29,6 +29,7 @@ import android.view.*;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.TextView;
+import android.widget.Toast;
 import de.akquinet.android.androlog.Log;
 
 import java.util.Date;
@@ -37,7 +38,7 @@ import java.util.Date;
 public class DetailActivity extends Activity {
 
     private WebView mWebview;
-    private final int MAP_WIDTH = 1920;
+    private final int MAP_HEIGHT = 1358;
     private String mDayType;
 
     /*** ACTIVITY LIFECYCLE ***/
@@ -73,21 +74,35 @@ public class DetailActivity extends Activity {
             throw new RuntimeException("Invalid mDayType: " + mDayType);
         }
         setTitle("DABS " + dayString);
-        final TextView textView = (TextView) findViewById(R.id.text_view);
-        textView.setText(String.format(getString(R.string.usage), dayString.toLowerCase()));
 
         // Get and configure WebView
-        this.mWebview = (WebView) findViewById(R.id.map_view);
-        this.mWebview.setInitialScale(getMapScale());
-        this.mWebview.setBackgroundColor(0x00000000);
-        this.mWebview.getSettings().setBuiltInZoomControls(true); // Show zoom controls
-        this.mWebview.getSettings().setUseWideViewPort(true); // Enable zooming out as much as possible
+        mWebview = (WebView) findViewById(R.id.map_view);
 
+        mWebview.setBackgroundColor(0x00000000);
+        mWebview.getSettings().setBuiltInZoomControls(true); // Show zoom controls
+        mWebview.getSettings().setUseWideViewPort(true); // Enable zooming out as much as possible
+
+        // Set correct scale value
+        mWebview.getViewTreeObserver().addOnGlobalLayoutListener(
+            new ViewTreeObserver.OnGlobalLayoutListener() {
+                public void onGlobalLayout() {
+                    // Gets called after layout has been done but before display,
+                    // so we can get the real height.
+                    final int height = mWebview.getHeight();
+                    Log.i("WebView height: " + String.valueOf(height));
+                    Double webViewScale = (double) height / (double) MAP_HEIGHT * 100d;
+                    Log.i("Map scale: " + String.valueOf(webViewScale.intValue()));
+                    mWebview.setInitialScale(webViewScale.intValue());
+                    //mWebview.getViewTreeObserver().removeGlobalOnLayoutListener( this );
+                }
+
+            }
+        );
         if (savedInstanceState != null) {
-            this.mWebview.restoreState(savedInstanceState);
+            mWebview.restoreState(savedInstanceState);
             setLoadingPanelVisibility(false);
         } else {
-            this.mWebview.setWebViewClient(new WebViewClient() {
+            mWebview.setWebViewClient(new WebViewClient() {
                 @Override
                 public void onLoadResource(WebView view, String url) {
                     setLoadingPanelVisibility(true);
@@ -156,10 +171,8 @@ public class DetailActivity extends Activity {
     private void setLoadingPanelVisibility(boolean visible) {
         if (visible) {
             findViewById(R.id.map_view).setVisibility(View.GONE);
-            findViewById(R.id.text_view).setVisibility(View.GONE);
             findViewById(R.id.loading_panel).setVisibility(View.VISIBLE);
         } else {
-            findViewById(R.id.text_view).setVisibility(View.VISIBLE);
             findViewById(R.id.map_view).setVisibility(View.VISIBLE);
             findViewById(R.id.loading_panel).setVisibility(View.GONE);
         }
@@ -180,20 +193,6 @@ public class DetailActivity extends Activity {
      */
     private String getTextURL() {
         return Settings.BASE_URL + "/" + mDayType + "/text/";
-    }
-
-    /**
-     * Get scale factor for map
-     */
-    private int getMapScale(){
-        // Get display width
-        Display display = ((WindowManager) getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
-        Point point = new Point();
-        display.getSize(point);
-        // Calculate map scale
-        Double val = (double) point.x / (double) MAP_WIDTH;
-        val = val * 100d;
-        return val.intValue();
     }
 
 

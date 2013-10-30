@@ -12,7 +12,6 @@
     <string name="today">Heute</string>
     <string name="tomorrow">Morgen</string>
     <string name="refresh">Aktualisieren</string>
-    <string name="usage">Hier kannst du die DABS-Karte für %1$s sehen. Mit doppeltem Tippen oder Multitouch-Gesten auf der Karte kann diese vergrössert werden.</string>
     <string name="timeout_message">Die Karte konnte nicht geladen werden. Dies liegt vermutlich an einer schlechten Internetverbindung. Erneut versuchen?</string>
 
     <!-- About -->

@@ -12,7 +12,6 @@
     <string name="today">Today</string>
     <string name="tomorrow">Tomorrow</string>
     <string name="refresh">Refresh</string>
-    <string name="usage">Here you can see the DABS map for %1$s. Double-tap or pinch the map to zoom.</string>
     <string name="timeout_message">The map could not be loaded. This is probably due to a bad internet connection. Do you want to try again?</string>
 
     <!-- About -->
