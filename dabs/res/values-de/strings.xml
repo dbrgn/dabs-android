@@ -1,25 +1,21 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='UTF-8'?>
 <resources>
-    <!-- General strings -->
-    <string name="app_name">DABS Viewer</string>
-    <string name="ok">OK</string>
-
-    <!-- Home -->
-    <string name="disclaimer_title">Disclaimer</string>
-    <string name="disclaimer_text">Alle DABS-Informationen in dieser App sind © by Skyguide. Obwohl ich (der Autor dieser App) alles daran setze möglichst aktuelle und genaue Daten bereitzustellen, kann ich keine Garantie dafür geben. Karten und Texte werden automatisiert aus den Skyguide PDFs extrahiert, bei diesem Prozess können Fehler passieren. Wenn du sichergehen möchtest dass die Daten 100% korrekt sind, dann schaue dir bitte die Original-Skyguide-PDFs an. Ich lehne jegliche Haftung in Bezug auf die Nutzung der Daten aus dieser App ab.</string>
-
-    <!-- Details -->
-    <string name="today">Heute</string>
-    <string name="tomorrow">Morgen</string>
-    <string name="refresh">Aktualisieren</string>
-    <string name="timeout_message">Die Karte konnte nicht geladen werden. Dies liegt vermutlich an einer schlechten Internetverbindung. Erneut versuchen?</string>
-
-    <!-- About -->
-    <string name="about_action">Über</string>
-    <string name="about_title">Über diese App</string>
-    <string name="about_title_part1">Die App</string>
-    <string name="about_text_part1">Diese App ist unter einer GPLv3-Lizenz veröffentlicht und verfügbar auf GitHub: https://github.com/dbrgn/dabs-android. Der Webservice welcher die ganze PDF-Verarbeitung übernimmt ist auch auf Github: https://github.com/dbrgn/dabs-service</string>
-    <string name="about_title_part2">Der Autor</string>
-    <string name="about_text_part2">Hallo, ich bin Danilo Bargen. Als Gleitschirmpilot finde ich diese Informationen nützlich und sehr wichtig, aber die PDF-Version des DABS von Skyguide ist unterwegs nicht sonderlich praktisch. Diese App versucht eine praktische Alternative zu den PDFs bereitzustellen.\n\nWenn du mich kontaktieren möchtest, sende einfach eine E-Mail an mail@dbrgn.ch oder einen Tweet an @dbrgn.</string>
-
+  <!--General strings-->
+  <string name="app_name">DABS Viewer</string>
+  <string name="ok">OK</string>
+  <!--Home-->
+  <string name="disclaimer_title">Disclaimer</string>
+  <string name="disclaimer_text">Alle DABS-Informationen in dieser App sind © by Skyguide. Obwohl ich (der Autor dieser App) alles daran setze möglichst aktuelle und genaue Daten bereitzustellen, kann ich dafür keine Garantie geben. Karten und Texte werden automatisiert aus den Skyguide PDFs extrahiert, bei diesem Prozess können Fehler passieren. Wenn du sichergehen möchtest dass die Daten 100% korrekt sind, dann schau dir bitte die Original-Skyguide-PDFs an. Ich lehne jegliche Haftung in Bezug auf die Nutzung der Daten aus dieser App ab.</string>
+  <!--Details-->
+  <string name="today">Heute</string>
+  <string name="tomorrow">Morgen</string>
+  <string name="refresh">Aktualisieren</string>
+  <string name="timeout_message">Die Karte konnte nicht geladen werden. Dies liegt vermutlich an einer schlechten Internetverbindung. Erneut versuchen?</string>
+  <!--About-->
+  <string name="about_action">Über</string>
+  <string name="about_title">Über diese App</string>
+  <string name="about_title_part1">Die App</string>
+  <string name="about_text_part1">Diese App ist unter der GPLv3 Lizenz veröffentlicht. Sowohl die App, wie auch der Webservice welcher die ganze PDF-Verarbeitung übernimmt, sind auf GitHub verfügbar: https://github.com/dbrgn/dabs-android bzw https://github.com/dbrgn/dabs-service</string>
+  <string name="about_title_part2">Der Autor</string>
+  <string name="about_text_part2">Hallo, ich bin Danilo Bargen. Als Gleitschirmpilot finde ich die tägliche Überprüfung des DABS sehr wichtig, aber die PDF-Version von Skyguide ist unterwegs nicht sonderlich praktisch. Mit dieser App soll das etwas einfacher werden.\n\nWenn du mich kontaktieren möchtest, sende einfach eine E-Mail an mail@dbrgn.ch oder einen Tweet an @dbrgn.</string>
 </resources>
