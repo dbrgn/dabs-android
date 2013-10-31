@@ -20,6 +20,14 @@ convenient on the go. This app tries to make that easier.
 - Homepage: http://dbrgn.ch/
 
 
+Language Support
+----------------
+
+Currently the app supports English and German. If you want to contribute
+translations or improve existing ones, you can do so on Transifex:
+https://www.transifex.com/projects/p/dabs-viewer/
+
+
 License
 -------
 
