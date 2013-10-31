@@ -161,6 +161,7 @@ public class DetailActivity extends Activity {
      * Update content in a background thread.
      */
     private void updateContent() {
+        mWebview.loadUrl("about:blank");
         mWebview.loadUrl(getMapURL());
     }
 
