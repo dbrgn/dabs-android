@@ -38,7 +38,7 @@ import java.util.Date;
 public class DetailActivity extends Activity {
 
     private WebView mWebview;
-    private final int MAP_HEIGHT = 1358;
+    private final int MAP_HEIGHT = 1273;
     private String mDayType;
 
     /*** ACTIVITY LIFECYCLE ***/

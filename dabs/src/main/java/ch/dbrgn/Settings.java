@@ -19,5 +19,5 @@ package ch.dbrgn;
 
 class Settings {
     public static final String BASE_URL = "http://dabs.dbrgn.ch";
-    public static final int CONTENT_LOAD_TIMEOUT_SECONDS = 20;
+    public static final int CONTENT_LOAD_TIMEOUT_SECONDS = 25;
 }
